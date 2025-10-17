@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { SiGoogle, SiFacebook, SiApple, SiX } from "react-icons/si";
-import { User, Mail, Smartphone, QrCode, X } from "lucide-react";
+import { User, Mail, Smartphone, X } from "lucide-react";
 import { PhoneLoginForm } from "@/components/login/phone-login-form";
 import { EmailLoginForm } from "@/components/login/email-login-form";
 import { UsernameLoginForm } from "@/components/login/username-login-form";
-import { QRCodeLogin } from "@/components/login/qr-code-login";
 import { TikTokLogo } from "@/components/tiktok-logo";
 
-type LoginMethod = "select" | "phone" | "email" | "username" | "qr";
+type LoginMethod = "select" | "phone" | "email" | "username";
 
 export default function LoginPage() {
   const [method, setMethod] = useState<LoginMethod>("select");
@@ -23,7 +21,7 @@ export default function LoginPage() {
         <div className="text-center space-y-3">
           <TikTokLogo className="mx-auto" />
           <h1 className="text-3xl font-bold text-foreground" data-testid="heading-login">
-            {method === "qr" ? "Log in with QR code" : "Log in to TikTok"}
+            Log in to TikTok
           </h1>
           {method === "select" && (
             <p className="text-sm text-muted-foreground" data-testid="text-description">
@@ -38,69 +36,12 @@ export default function LoginPage() {
               <Button
                 variant="outline"
                 className="w-full h-12 justify-start gap-3 text-base font-medium hover-elevate active-elevate-2"
-                onClick={() => setMethod("qr")}
-                data-testid="button-qr-login"
-              >
-                <QrCode className="w-5 h-5" />
-                Use QR code
-              </Button>
-
-              <Button
-                variant="outline"
-                className="w-full h-12 justify-start gap-3 text-base font-medium hover-elevate active-elevate-2"
                 onClick={() => setMethod("phone")}
                 data-testid="button-select-phone-email-username"
               >
                 <Smartphone className="w-5 h-5" />
                 Use phone / email / username
               </Button>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-border" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground" data-testid="text-or-continue-with">Or continue with</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <Button
-                  variant="outline"
-                  className="h-12 gap-2 hover-elevate active-elevate-2"
-                  data-testid="button-google-login"
-                >
-                  <SiGoogle className="w-5 h-5" />
-                  <span className="text-sm font-medium">Google</span>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  className="h-12 gap-2 hover-elevate active-elevate-2"
-                  data-testid="button-facebook-login"
-                >
-                  <SiFacebook className="w-5 h-5 text-[#1877F2]" />
-                  <span className="text-sm font-medium">Facebook</span>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  className="h-12 gap-2 hover-elevate active-elevate-2"
-                  data-testid="button-apple-login"
-                >
-                  <SiApple className="w-5 h-5" />
-                  <span className="text-sm font-medium">Apple</span>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  className="h-12 gap-2 hover-elevate active-elevate-2"
-                  data-testid="button-twitter-login"
-                >
-                  <SiX className="w-5 h-5" />
-                  <span className="text-sm font-medium">Twitter</span>
-                </Button>
-              </div>
             </>
           )}
 
@@ -269,23 +210,6 @@ export default function LoginPage() {
             </div>
           )}
 
-          {method === "qr" && (
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 mb-4">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleBack}
-                  data-testid="button-back-qr"
-                  className="hover-elevate active-elevate-2"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-
-              <QRCodeLogin />
-            </div>
-          )}
         </div>
 
         {method === "select" && (
