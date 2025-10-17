@@ -370,7 +370,7 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
   if (step === "otp") {
     return (
       <Form {...otpForm}>
-        <form onSubmit={otpForm.handleSubmit(onSubmitOtp)} className="space-y-4">
+        <form onSubmit={otpForm.handleSubmit(onSubmitOtp)} className="space-y-4" autoComplete="off">
           <FormField
             control={otpForm.control}
             name="otp"
@@ -380,9 +380,13 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
                 <FormControl>
                   <Input
                     placeholder="Enter your OTP"
-                    type="text"
+                    type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={6}
                     className="h-12"
                     data-testid="input-otp"
+                    autoComplete="off"
                     {...field}
                   />
                 </FormControl>
