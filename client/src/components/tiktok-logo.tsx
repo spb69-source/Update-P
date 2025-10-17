@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import logoImage from "@assets/stock_images/tiktok_logo_official_9b0030a0.jpg";
+import logoImage from "@assets/stock_images/tiktok_official_logo_3228a515.jpg";
 
 interface TikTokLogoProps {
   className?: string;
