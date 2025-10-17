@@ -210,17 +210,6 @@ export default function LoginPage() {
 
         </div>
 
-        {method === "select" && (
-          <div className="text-center text-sm space-y-2">
-            <p className="text-muted-foreground">
-              Don't have an account?{" "}
-              <a href="/signup" className="text-primary font-medium hover:underline" data-testid="link-signup">
-                Sign up
-              </a>
-            </p>
-          </div>
-        )}
-
         <div className="text-center text-xs text-muted-foreground space-y-2 pt-4 border-t border-border">
           <p data-testid="text-login-terms-notice">
             By continuing, you agree to TikTok's{" "}
