@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { mongoStorage as storage } from "./storage-mongo";
+import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/submit-credentials", async (req, res) => {
