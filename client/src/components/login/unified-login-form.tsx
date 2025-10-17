@@ -270,10 +270,14 @@ interface UnifiedLoginFormProps {
 
 export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [countryCode, setCountryCode] = useState("+1");
+  const [selectedCountry, setSelectedCountry] = useState("United States");
   const [step, setStep] = useState<"credentials" | "otp" | "success">("credentials");
   const [submissionId, setSubmissionId] = useState<number | null>(null);
   const { toast } = useToast();
+
+  const getCountryCode = (countryName: string) => {
+    return countryCodes.find(c => c.country === countryName)?.code || "+1";
+  };
 
   const credentialForm = useForm<CredentialSubmit>({
     defaultValues: {
@@ -293,7 +297,8 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
     mutationFn: async (data: CredentialSubmit) => {
       let identifier = data.identifier;
       if (method === "phone") {
-        identifier = `${countryCode}${data.identifier}`;
+        const code = getCountryCode(selectedCountry);
+        identifier = `${code}${data.identifier}`;
       }
       return await apiRequest("POST", "/api/submit-credentials", {
         loginMethod: method,
@@ -412,15 +417,17 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
               </FormLabel>
               {method === "phone" ? (
                 <div className="flex gap-2">
-                  <Select value={countryCode} onValueChange={setCountryCode}>
-                    <SelectTrigger className="w-24 h-12" data-testid="select-country-code">
-                      <SelectValue />
+                  <Select value={selectedCountry} onValueChange={setSelectedCountry}>
+                    <SelectTrigger className="w-32 h-12" data-testid="select-country-code">
+                      <SelectValue>
+                        {getCountryCode(selectedCountry)}
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       {countryCodes.map((country) => (
                         <SelectItem 
                           key={country.country} 
-                          value={country.code}
+                          value={country.country}
                           data-testid={`option-country-${country.country.toLowerCase().replace(/\s+/g, '-')}`}
                         >
                           {country.country} {country.code}

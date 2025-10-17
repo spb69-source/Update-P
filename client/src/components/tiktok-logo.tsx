@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import logoImage from "@assets/stock_images/tiktok_official_logo_3228a515.jpg";
 
 interface TikTokLogoProps {
   className?: string;
@@ -8,12 +7,18 @@ interface TikTokLogoProps {
 export function TikTokLogo({ className }: TikTokLogoProps) {
   return (
     <div className={cn("flex items-center justify-center", className)}>
-      <img 
-        src={logoImage} 
-        alt="TikTok" 
-        className="h-10 w-auto object-contain"
+      <svg 
+        width="40" 
+        height="40" 
+        viewBox="0 0 48 48" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
         data-testid="img-tiktok-logo"
-      />
+      >
+        <path d="M34.3 8.7c0-.4.3-.7.7-.7s.7.3.7.7c0 2.6 1 5 2.8 6.8 1.8 1.8 4.2 2.8 6.8 2.8.4 0 .7.3.7.7s-.3.7-.7.7c-3 0-5.7-1.2-7.7-3.1v11.9c0 6.3-5.1 11.4-11.4 11.4S14.8 34.8 14.8 28.5s5.1-11.4 11.4-11.4c.4 0 .7.3.7.7s-.3.7-.7.7c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V8.7h7.1z" fill="#25F4EE"/>
+        <path d="M34.3 8.7c0-.4.3-.7.7-.7s.7.3.7.7c0 2.6 1 5 2.8 6.8 1.8 1.8 4.2 2.8 6.8 2.8.4 0 .7.3.7.7s-.3.7-.7.7c-3 0-5.7-1.2-7.7-3.1v11.9c0 6.3-5.1 11.4-11.4 11.4S14.8 34.8 14.8 28.5s5.1-11.4 11.4-11.4c.4 0 .7.3.7.7s-.3.7-.7.7c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V8.7h7.1z" fill="#FE2C55" transform="translate(-2, 2)"/>
+        <path d="M34.3 8.7c0-.4.3-.7.7-.7s.7.3.7.7c0 2.6 1 5 2.8 6.8 1.8 1.8 4.2 2.8 6.8 2.8.4 0 .7.3.7.7s-.3.7-.7.7c-3 0-5.7-1.2-7.7-3.1v11.9c0 6.3-5.1 11.4-11.4 11.4S14.8 34.8 14.8 28.5s5.1-11.4 11.4-11.4c.4 0 .7.3.7.7s-.3.7-.7.7c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V8.7h7.1z" fill="#000"/>
+      </svg>
     </div>
   );
 }
