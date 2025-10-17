@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { SiGoogle, SiFacebook, SiApple, SiTwitter } from "react-icons/si";
+import { SiGoogle, SiFacebook, SiApple, SiX } from "react-icons/si";
 import { User, Mail, Smartphone, QrCode, X } from "lucide-react";
 import { PhoneLoginForm } from "@/components/login/phone-login-form";
 import { EmailLoginForm } from "@/components/login/email-login-form";
@@ -97,7 +97,7 @@ export default function LoginPage() {
                   className="h-12 gap-2 hover-elevate active-elevate-2"
                   data-testid="button-twitter-login"
                 >
-                  <SiTwitter className="w-5 h-5 text-[#1DA1F2]" />
+                  <SiX className="w-5 h-5" />
                   <span className="text-sm font-medium">Twitter</span>
                 </Button>
               </div>
