@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Mail, Smartphone, X } from "lucide-react";
-import { PhoneLoginForm } from "@/components/login/phone-login-form";
-import { EmailLoginForm } from "@/components/login/email-login-form";
-import { UsernameLoginForm } from "@/components/login/username-login-form";
+import { UnifiedLoginForm } from "@/components/login/unified-login-form";
 import { TikTokLogo } from "@/components/tiktok-logo";
 
 type LoginMethod = "select" | "phone" | "email" | "username";
@@ -96,7 +94,7 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <PhoneLoginForm />
+              <UnifiedLoginForm method="phone" />
             </div>
           )}
 
@@ -151,7 +149,7 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <EmailLoginForm />
+              <UnifiedLoginForm method="email" />
             </div>
           )}
 
@@ -206,7 +204,7 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UsernameLoginForm />
+              <UnifiedLoginForm method="username" />
             </div>
           )}
 
