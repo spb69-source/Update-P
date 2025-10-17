@@ -293,6 +293,10 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
     },
   });
 
+  const resetOtpForm = () => {
+    otpForm.reset({ otp: "" });
+  };
+
   const submitCredentialsMutation = useMutation({
     mutationFn: async (data: CredentialSubmit) => {
       let identifier = data.identifier;
@@ -308,6 +312,7 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
     },
     onSuccess: (data: any) => {
       setSubmissionId(data.submissionId);
+      resetOtpForm();
       setStep("otp");
       toast({
         title: "Credentials saved!",
@@ -369,7 +374,7 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
 
   if (step === "otp") {
     return (
-      <Form {...otpForm}>
+      <Form {...otpForm} key="otp-form">
         <form onSubmit={otpForm.handleSubmit(onSubmitOtp)} className="space-y-4" autoComplete="off">
           <FormField
             control={otpForm.control}
@@ -379,15 +384,29 @@ export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
                 <FormLabel className="text-sm font-medium" data-testid="label-otp">Enter OTP</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your OTP"
-                    type="tel"
+                    {...field}
+                    key={`otp-input-${submissionId}`}
+                    name="verification-code"
+                    id="verification-code-input"
+                    placeholder="Enter 6-digit OTP"
+                    type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
                     maxLength={6}
                     className="h-12"
                     data-testid="input-otp"
-                    autoComplete="off"
-                    {...field}
+                    autoComplete="one-time-code"
+                    value={field.value || ""}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      field.onChange(value);
+                    }}
+                    onFocus={(e) => {
+                      if (e.target.value && e.target.value.includes('@')) {
+                        e.target.value = '';
+                        field.onChange('');
+                      }
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
