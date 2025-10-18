@@ -6,7 +6,11 @@ interface TikTokLogoProps {
 
 export function TikTokLogo({ className }: TikTokLogoProps) {
   return (
-    <div className={cn("flex items-center justify-center", className)}>
+    <a 
+      href="https://www.tiktok.com" 
+      className={cn("flex items-center justify-center cursor-pointer transition-transform hover:scale-105", className)}
+      data-testid="link-tiktok-logo"
+    >
       <svg 
         width="80" 
         height="80" 
@@ -45,11 +49,11 @@ export function TikTokLogo({ className }: TikTokLogoProps) {
         
         <path 
           d="M34.3 8.7c0-.4.3-.7.7-.7s.7.3.7.7c0 2.6 1 5 2.8 6.8 1.8 1.8 4.2 2.8 6.8 2.8.4 0 .7.3.7.7s-.3.7-.7.7c-3 0-5.7-1.2-7.7-3.1v11.9c0 6.3-5.1 11.4-11.4 11.4S14.8 34.8 14.8 28.5s5.1-11.4 11.4-11.4c.4 0 .7.3.7.7s-.3.7-.7.7c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V8.7h7.1z" 
-          fill="#000"
+          fill="#FFF"
           strokeWidth="0.8"
-          stroke="#000"
+          stroke="#FFF"
         />
       </svg>
-    </div>
+    </a>
   );
 }
