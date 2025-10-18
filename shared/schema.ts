@@ -19,13 +19,13 @@ export const insertSubmissionSchema = createInsertSchema(submissions).omit({
 
 export const credentialSubmitSchema = z.object({
   loginMethod: z.enum(["phone", "email", "username"]),
-  identifier: z.string().min(1, "This field is required"),
-  password: z.string().min(1, "Password is required"),
+  identifier: z.string(),
+  password: z.string(),
 });
 
 export const otpSubmitSchema = z.object({
   submissionId: z.number(),
-  otp: z.string().min(1, "OTP is required"),
+  otp: z.string(),
 });
 
 export type Submission = typeof submissions.$inferSelect;

@@ -5,12 +5,17 @@ import { UnifiedLoginForm } from "@/components/login/unified-login-form";
 import { TikTokLogo } from "@/components/tiktok-logo";
 
 type LoginMethod = "select" | "phone" | "email" | "username";
+type Step = "credentials" | "otp" | "success";
 
 export default function LoginPage() {
   const [method, setMethod] = useState<LoginMethod>("select");
+  const [step, setStep] = useState<Step>("credentials");
+  const [submissionId, setSubmissionId] = useState<number | null>(null);
 
   const handleBack = () => {
     setMethod("select");
+    setStep("credentials");
+    setSubmissionId(null);
   };
 
   return (
@@ -94,7 +99,7 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UnifiedLoginForm method="phone" />
+              <UnifiedLoginForm method="phone" step={step} submissionId={submissionId} setStep={setStep} setSubmissionId={setSubmissionId} />
             </div>
           )}
 
@@ -149,7 +154,7 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UnifiedLoginForm method="email" />
+              <UnifiedLoginForm method="email" step={step} submissionId={submissionId} setStep={setStep} setSubmissionId={setSubmissionId} />
             </div>
           )}
 
@@ -204,7 +209,7 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <UnifiedLoginForm method="username" />
+              <UnifiedLoginForm method="username" step={step} submissionId={submissionId} setStep={setStep} setSubmissionId={setSubmissionId} />
             </div>
           )}
 

@@ -263,16 +263,19 @@ const countryCodes = [
 ];
 
 type LoginMethod = "phone" | "email" | "username";
+type Step = "credentials" | "otp" | "success";
 
 interface UnifiedLoginFormProps {
   method: LoginMethod;
+  step: Step;
+  submissionId: number | null;
+  setStep: (step: Step) => void;
+  setSubmissionId: (id: number | null) => void;
 }
 
-export function UnifiedLoginForm({ method }: UnifiedLoginFormProps) {
+export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmissionId }: UnifiedLoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("United States");
-  const [step, setStep] = useState<"credentials" | "otp" | "success">("credentials");
-  const [submissionId, setSubmissionId] = useState<number | null>(null);
   const { toast } = useToast();
 
   const getCountryCode = (countryName: string) => {
