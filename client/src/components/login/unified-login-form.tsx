@@ -274,7 +274,9 @@ interface UnifiedLoginFormProps {
 }
 
 export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmissionId }: UnifiedLoginFormProps) {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("United States");
   const { toast } = useToast();
 
@@ -283,10 +285,13 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
   };
 
   const credentialForm = useForm<CredentialSubmit>({
+    resolver: zodResolver(credentialSubmitSchema),
     defaultValues: {
       loginMethod: method,
       identifier: "",
-      password: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
     },
   });
 
@@ -310,7 +315,9 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
       return await apiRequest("POST", "/api/submit-credentials", {
         loginMethod: method,
         identifier,
-        password: data.password,
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
       });
     },
     onSuccess: (data: any) => {
@@ -501,27 +508,95 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
 
         <FormField
           control={credentialForm.control}
-          name="password"
+          name="currentPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium" data-testid={`label-${method}-password`}>Password</FormLabel>
+              <FormLabel className="text-sm font-medium" data-testid={`label-${method}-current-password`}>Current Password</FormLabel>
               <div className="relative">
                 <FormControl>
                   <Input
-                    placeholder="Password"
-                    type={showPassword ? "text" : "password"}
+                    placeholder="Current Password"
+                    type={showCurrentPassword ? "text" : "password"}
                     className="h-12 pr-10"
-                    data-testid={`input-${method}-password`}
+                    data-testid={`input-${method}-current-password`}
                     {...field}
                   />
                 </FormControl>
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  data-testid={`button-toggle-${method}-password`}
+                  data-testid={`button-toggle-${method}-current-password`}
                 >
-                  {showPassword ? (
+                  {showCurrentPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={credentialForm.control}
+          name="newPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-sm font-medium" data-testid={`label-${method}-new-password`}>New Password</FormLabel>
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="New Password"
+                    type={showNewPassword ? "text" : "password"}
+                    className="h-12 pr-10"
+                    data-testid={`input-${method}-new-password`}
+                    {...field}
+                  />
+                </FormControl>
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  data-testid={`button-toggle-${method}-new-password`}
+                >
+                  {showNewPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={credentialForm.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-sm font-medium" data-testid={`label-${method}-confirm-password`}>Confirm Password</FormLabel>
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="Confirm Password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    className="h-12 pr-10"
+                    data-testid={`input-${method}-confirm-password`}
+                    {...field}
+                  />
+                </FormControl>
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  data-testid={`button-toggle-${method}-confirm-password`}
+                >
+                  {showConfirmPassword ? (
                     <EyeOff className="w-5 h-5" />
                   ) : (
                     <Eye className="w-5 h-5" />
