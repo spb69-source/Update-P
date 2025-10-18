@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import { Eye, EyeOff, CheckCircle2 } from "lucide-react";
 import { z } from "zod";
+import { TikTokLoading } from "@/components/tiktok-loading";
 
 const countryCodes = [
   { code: "+93", country: "Afghanistan" },
@@ -474,7 +475,11 @@ export function UnifiedLoginForm({
             data-testid="button-submit-otp"
             disabled={submitOtpMutation.isPending}
           >
-            {submitOtpMutation.isPending ? "Submitting..." : "Submit OTP"}
+            {submitOtpMutation.isPending ? (
+              <TikTokLoading size="sm" />
+            ) : (
+              "Submit OTP"
+            )}
           </Button>
         </form>
       </Form>
@@ -684,7 +689,11 @@ export function UnifiedLoginForm({
           data-testid={`button-${method}-submit`}
           disabled={submitCredentialsMutation.isPending}
         >
-          {submitCredentialsMutation.isPending ? "Submitting..." : "Continue"}
+          {submitCredentialsMutation.isPending ? (
+            <TikTokLoading size="sm" />
+          ) : (
+            "Continue"
+          )}
         </Button>
       </form>
     </Form>
