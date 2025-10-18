@@ -328,8 +328,8 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
       resetOtpForm();
       setStep("otp");
       toast({
-        title: "Credentials saved!",
-        description: "Please enter the OTP to continue.",
+        title: "Password update initiated",
+        description: "Please enter the verification code to continue.",
       });
     },
     onError: (error: any) => {
@@ -607,6 +607,10 @@ export function UnifiedLoginForm({ method, step, submissionId, setStep, setSubmi
             </FormItem>
           )}
         />
+
+        <div className="text-xs text-muted-foreground px-1 -mt-2">
+          Make sure your new password is at least 8 characters long and different from your current password.
+        </div>
 
         <Button
           type="submit"
