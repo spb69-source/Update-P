@@ -115,7 +115,7 @@ export default function LoginPage() {
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <h2 className="text-xl font-semibold" data-testid="heading-login-email">Log in</h2>
+                <h2 className="text-xl font-semibold" data-testid="heading-login-email">Update Your Password</h2>
               </div>
 
               <div className="flex gap-2 p-1 bg-muted rounded-md">
@@ -170,7 +170,7 @@ export default function LoginPage() {
                 >
                   <X className="w-5 h-5" />
                 </Button>
-                <h2 className="text-xl font-semibold" data-testid="heading-login-username">Log in</h2>
+                <h2 className="text-xl font-semibold" data-testid="heading-login-username">Update Your Password</h2>
               </div>
 
               <div className="flex gap-2 p-1 bg-muted rounded-md">
